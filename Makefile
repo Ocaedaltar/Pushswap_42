@@ -3,18 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+         #
+#    By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 21:34:13 by mlormois          #+#    #+#              #
-#    Updated: 2021/12/02 21:44:11 by mlormois         ###   ########.fr        #
+#    Updated: 2021/12/04 05:14:05 by mlormois         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
 
+# **************************************************************************** #
+
 OBJ_DIR		=	objs
 INC_DIR		=	incs
 SRC_DIR		=	$(shell find srcs -type d)
+
+# **************************************************************************** #
+
 vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 SRCS	= $(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 
