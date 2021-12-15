@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:03:12 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/03 19:57:50 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:36:57 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_isnumber(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] >= '0' && str[i] <= '9')
+		if (str[i] < '0' || str[i] > '9')
 			if (!(i == 0 && (str[i] == '-' || str[i] == '+')))
 				return (1);
 		i++;

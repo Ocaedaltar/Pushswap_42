@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 21:49:05 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/04 05:25:02 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:40:23 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		main(int ac, char **av)
 	t_stack *stack;
 
 	stack = NULL;
-	if (ac > 1 && ft_checking(&stack, ac - 1, av + 1))
+	if (ac > 1 && ft_checking(&stack, av + 1, ac - 1))
 		ft_pushswap(ac - 1, stack);
 	return (EXIT_SUCCESS);
 }
