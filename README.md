@@ -106,32 +106,32 @@ void	ft_inst_print(int fd, t_inst *data);
 - Pour mon little_sort, que j'explique ci dessous!
 
 ## L'Execution :
-#### Select Sort:
+### Select Sort:
 Notre stack, fraichement cree peut dors et deja etre ranger! Il faut donc verifier si elle l'est!
 Puis en fonction de la longeur de notre stack nous allons choisir quelle algorythm nous allons appliquer. Ici:
 - `little_sort` <= 7     // la Limite est definie par ma capaciter a trier dans une seul stack. 
 - `medium_sort` <= 14    // 2 fois la limit de little.
 - `big_sort`    > 14	 // au dessus de la limite de medium.
 
-#### Little Sort:
+## Little Sort:
 
 // WORK IN PROGRESSE
 
-#### Medium Sort:
+### Medium Sort:
 
 // WORK IN PROGRESSE
 
-#### Big Sort:
+## Big Sort:
 
 Mon big_sort decoule de l'algorythm Insert Sort, un algo tres modulable qui nous permet d'ajouter plein d'optimisation.
 Ici, nous allons remplir une list t_inst avec le retour de chaque etape tel que : `ft_inst_addback(&inst, ft_etapeX(&sa, &sb, etc ));`
 qui nous permettra d'afficher nos instruction d'un coup a la fin de notre algo. 
 
-- .1. PLSSC ( plus longue sous suite croissante ) 
+#### 1. PLSSC ( plus longue sous suite croissante ) 
 
 // WORK IN PROGRESSE
 
-- .2. Fill Stack B
+#### 2. Fill Stack B
 
 Une fois la PLSSC trouver, allons chercher la mediane de notre liste. 🔔 Quesqu'une mediane: 
 C'est la valeur qui compte autant ( ou une difference de +-1 ) de valeur inferieur et de valeur superieur a celle ci.
@@ -140,11 +140,105 @@ Pas besoin de trier et de garder l'index de chaque valeur! Nous allons nous en s
 Une fois fait, nous allons push dans B toute les valeur qui ne ce trouve pas dans PLSSC et Inferieur a notre mediane.
 Puis toute les valeur Superieur ( mediane comprit ) Non dans PLSSC. 
 
-Nous devrions nous retrouver avec seulement les valeur de PLSSC.
+Nous devrions nous retrouver avec seulement les valeur de PLSSC Dans A. Et le reste des valeur dans B partitionne en 2.
+![Fillstack](https://user-images.githubusercontent.com/52299490/146216548-2c364365-fe06-4f81-aeb9-50b6d7d33d3f.png)
 
-- .3. Best Push
+#### 3. Best Push `t_inst *ft_best_push(t_stack **sa, t_stack **sb, int index, int len_sb)`
 
-// WORK IN PROGRESSE
+Best Push, c'est la fonction mere de l'algo, elle calculera le cout minimum en instruction d'une valeur X pour la push a ca place de la stack B a la stack A.
+Puis elle executera ces instruction, avant de nous retourner cette meme liste d'instruction. 
+
+Pour nos calcule nous allons avoir besoin d'un tableau d'entier, 8 entier precisement:
+
+| | | CALCUL | INIT |
+| --- | --- | --- | --- |
+| RA | nombre de RA | voir ci dessous | 0 |
+| RB | nombre de RB | L'index mis en arguments de la fonction | 0 |
+| RRB | nombre de RRB | Le resultat de:  `len_sb - RB` | 0 |
+| RRA | nombre de RRB | Le resultat de:  `len_sa - RA` | 0 |
+| RR | nombre de RR | Egale au plus petit entre RA && RB | 0 |
+| RRR | nombre de RRR | Egale au plus petit entre RRA && RRB | 0 |
+| METH | la methode utilisee | voir ci dessous | 0 |
+| NI | le nombre d'instruction | resultat du calcule de la methode | INT_MAX |
+
+💡 Penser a utiliser des Defines pour: RA RB RRA RRB RR RRR METH et NI 
+
+Pour avoir notre nombre de RA ca sera resultat de `ft_place_value(t_satck *sa, int value)`.
+il nous faudra lui donner la value evaluer dans la stack B ( la valeur situer a l'index donner en arguments de la stack B )
+ensuite tres simple: 2 cas et 1 execption
+```
+Si ( sa->value < value )
+   --> on incremante tant que c'est vrai. 
+Sinon
+   --> EXECPTION: Si jamais la derniere valeur est inferieur alors nous somme deja au bonne endroit! 
+   --> on incremante tant que (sa->value > value) puis tant que (sa->value > value)
+```
+le nombre d'incrementation represante notre nombre de RA! 
+
+Pour la methodes il en existe 4 au totale:
+Il nous suffit de calculer chaque cas et de retenir le resultat le plus petit dans NI, et d'enregistrer la methode dans METH :
+- RA + RB + RR
+- RRA + RRB + RRR
+- RA + RRB
+- RB + RRA
+
+```
+	int  nc[8];              // celui si sera un tableau tempon sur la stack
+	int  tot[4];             // tableau pour le calcule de notre methode
+	
+	tot[0] = (nc[RA] - nc[RR]) + (nc[RB] - nc[RR]) + nc[RR];
+	tot[1] = (nc[RA] + nc[RRB]);
+	tot[2] = (nc[RRA] - nc[RRR]) + (nc[RRB] - nc[RRR]) + nc[RRR];
+	tot[3] = (nc[RRA] + nc[RB]);
+
+	nc[MET] = 1 * (tot[1] < tot[0] && tot[1] < tot[2] && tot[1] < tot[3])
+		+ 2 * (tot[2] < tot[0] && tot[2] < tot[1] && tot[2] < tot[3])
+		+ 3 * (tot[3] < tot[0] && tot[3] < tot[1] && tot[3] < tot[2]) + 0;
+
+	nc[NI] = tot[0] * (nc[MET] == 0) + tot[1] * (nc[MET] == 1)
+		+ tot[2] * (nc[MET] == 2) + tot[3] * (nc[MET] == 3);
+```
+⚠️ Ceci est du branchless, 
+
+Dans notre tableau nous ne garderons uniquement les resultats du meilleur rencontrer. Si jamais NI est inferieur a celui de notre tableau alors l'integraliter des valeurs sont remplacer par le nouveau!
+```
+void	ft_remplace_counter(int **ct, int *nc)
+{
+	(*ct)[RA] = (nc[RA] - nc[RR]) * (nc[MET] == 0) + nc[RA] * (nc[MET] != 0);
+	(*ct)[RB] = (nc[RB] - nc[RR]) * (nc[MET] == 0) + nc[RB] * (nc[MET] != 0);
+	(*ct)[RR] = nc[RR];
+	(*ct)[RRA] = (nc[RRA] - nc[RRR]) * (nc[MET] == 2) + nc[RRA] * (nc[MET] != 2);
+	(*ct)[RRB] = (nc[RRB] - nc[RRR]) * (nc[MET] == 2) + nc[RRB] * (nc[MET] != 2);
+	(*ct)[RRR] = nc[RRR];
+	(*ct)[MET] = nc[MET];
+	(*ct)[NI] = nc[NI];
+}
+```
+
+⚠️ Pour ne pas avoir a verifier l'integraliter de la stack B, Il fait dans un premier temps evaluer les valeurs des deux cote de la stack en meme temps, (🔔 car la queue de la stack, n'est qu'a une instruction de ce retrouver en tete ! )
+Et d'avoir comme condition d'arret, le nombre d'instruction de notre meilleur value. Quand l'index ( 🔔 qui represente le nombre de RB) sera egale a NI, alors nous sommes sur davoir deja trouver la meilleur valeur a push!
+```
+	while (i < nb_inst && i < len_sb)
+	{
+		nb_inst = ft_search_push(*sa, *sb, i, &ct);
+		if (len_sb > 1)
+			nb_inst = ft_search_push(*sa, *sb, len_sb - i - 1, &ct);
+		i++;
+	}
+```
+
+Une fois le Best Push trouver, il faudra construire les instructions grace a notre tableau. 
+ca sera le job de notre utils : `t_inst *ft_make_inst(int *best, int methode);`
+Puis d'applique a nos stack cette meme liste s'instructions. 
+
+On n'oublie pas de free notre tableau d'entier, en on retoune la liste d'instruction!
+
+Best Push sera appeller tant que la stack B n'est pas vide!   
+```
+	while (sb != NULL)
+		ft_inst_addback(&inst, ft_best_push(&sa, &sb, ft_stack_size(sb)));
+```
+
 
 - .4. Replace Stack
 
@@ -158,7 +252,11 @@ tout simplement en comptant le nombre de RA, la longueur de la stack, et si RA e
 Maintenant notre stack est bien trier, il ne nous reste plus que l'affichage de nos intruction. 
 Donc nous avons un list chainee. l'opti ici sera de strjoin chaque instruction pour appeller le moins de fois possible write ( il est trop gourmand en temps j'aime pas attendre devant mon ecran ). 
 
-Une fois nos instruction envoyer, on peut tout free! la stack, nos intructions. 🦸 SUPER 🦸
+Une fois nos instruction envoyer, on peut tout free! la stack, nos intructions.
+
+## BONUS :
+
+// WORK IN PROGRESS
 
 
 
