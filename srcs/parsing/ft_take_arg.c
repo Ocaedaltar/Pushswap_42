@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 12:38:51 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/04 05:44:41 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:45:59 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_inst	*ft_take_av(char *str)
 	if (tab_str == NULL)
 		return (NULL);
 	while (tab_str[i])
-		ft_inst_push(&lst, ft_inst_create(tab_str[i++]));
+		ft_inst_addback(&lst, ft_inst_create(tab_str[i++]));
 	ft_strs_clear(tab_str);
 	return (lst);
 }
@@ -42,7 +42,7 @@ int	ft_take_arg(t_inst **arg, char **av, int ac)
 		elem = ft_take_av(av[index]);
 		if (elem == NULL)
 			error_parsing(arg, NULL);
-		ft_inst_push(arg, elem);
+		ft_inst_addback(arg, elem);
 		index++;
 	}
 	return (EXIT_SUCCESS);

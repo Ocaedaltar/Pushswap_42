@@ -24,14 +24,14 @@ t_stack	*ft_stack_create(int value)
 	return (data);
 }
 
-void	ft_stack_front(t_stack **data, t_stack *elem)
+void	ft_stack_addfront(t_stack **data, t_stack *elem)
 {
 	if (*data)
 		elem->next = (*data);
 	(*data) = elem;
 }
 
-void	ft_stack_back(t_stack **data, t_stack *elem)
+void	ft_stack_addback(t_stack **data, t_stack *elem)
 {
 	t_stack	*last;
 
@@ -81,9 +81,9 @@ void	ft_stack_clear(t_stack **data)
 // 	ft_stack_print(data);
 // 	printf("size : %d\n", ft_stack_size(data));
 // 	for (int i = 1; i < ac; i++)
-// 		ft_stack_back(&data, ft_stack_create(atoi(av[i])));
+// 		ft_stack_addback(&data, ft_stack_create(atoi(av[i])));
 // 	for (int i = 1; i < ac; i++)
-// 		ft_stack_front(&data2, ft_stack_create(atoi(av[i])));
+// 		ft_stack_addfront(&data2, ft_stack_create(atoi(av[i])));
 // 	ft_stack_print(data);
 // 	ft_stack_print(data2);
 // 	printf("size : %d\n", ft_stack_size(data2));

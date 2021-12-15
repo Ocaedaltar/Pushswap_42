@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 10:40:54 by mlormois          #+#    #+#             */
-/*   Updated: 2021/11/15 16:56:25 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:44:04 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_inst	*ft_inst_create(char *inst)
 	return (data);
 }
 
-void	ft_inst_push(t_inst **data, t_inst *elem)
+void	ft_inst_addback(t_inst **data, t_inst *elem)
 {
 	t_inst	*last;
 
@@ -39,7 +39,7 @@ void	ft_inst_push(t_inst **data, t_inst *elem)
 	}
 }
 
-void	ft_inst_pop(t_inst *data)
+void	ft_inst_popbackback(t_inst *data)
 {
 	t_inst	*prev;
 	t_inst	*last;
@@ -80,11 +80,11 @@ void	ft_inst_clear(t_inst **data)
 
 // 	data = NULL;
 // 	ft_inst_print(1, data);			// PRINT NULL
-// 	ft_inst_pop(data);				// POP NULL
+// 	ft_inst_popback(data);				// POP NULL
 // 	for (int i = 1; i < ac; i++)	// CREATE && PUSH
 // 		ft_inst_push(&data, ft_inst_create(av[i]));
 // 	ft_inst_print(1, data);			// PRINT
-// 	ft_inst_pop(data);				// POP 
+// 	ft_inst_popback(data);				// POP 
 // 	ft_inst_print(1, data);			// PRINT
 // 	ft_inst_clear(&data);			// CLEAR
 // 	ft_inst_print(1, data);			// PRINT NULL

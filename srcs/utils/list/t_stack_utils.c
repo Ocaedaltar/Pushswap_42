@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:31:34 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/04 05:56:05 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:44:42 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_stack	*ft_stackdup(t_stack *list)
 	new_list = NULL;
 	while (list)
 	{
-		ft_stack_back(&new_list, ft_stack_create(list->value));
+		ft_stack_addback(&new_list, ft_stack_create(list->value));
 		list = list->next;
 	}
 	return (new_list);
@@ -47,7 +47,7 @@ t_stack	*ft_create_stack_a(t_inst *arg)
 			ft_inst_clear(&arg);
 			error_create(&lst, NULL);
 		}
-		ft_stack_back(&lst, elem);
+		ft_stack_addback(&lst, elem);
 		arg = arg->next;
 	}
 	return (lst);

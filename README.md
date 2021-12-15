@@ -53,11 +53,11 @@ Simplement avec deux index `i` && `j`, nous allons comparer tout les elements en
 
 La stack, restons simple:  
 ``` 
-typedef struct s_lst	t_lst;
+typedef struct s_lst	t_stack;
 struct s_lst
 {
 	int    value;
-	t_lst  *next;
+	t_stack  *next;
 };
 ```
 Tout est parfait, nous allons pouvoir commencer le project tranquillement!
@@ -75,7 +75,7 @@ void	_px(t_stack **sa, t_stack **sb, int move);
 ```
 Pour votre utilisation de la stack:
 ```
-t_lst	*ft_stack_create(int value);
+t_stack	*ft_stack_create(int value);
 void	ft_stack_addback(t_stack **data, t_stack *elem);
 int     ft_stack_size(t_stack *data);
 void	ft_stack_clear(t_stack **data);
@@ -96,7 +96,7 @@ avec ses fonctions:
 ```
 t_inst	*ft_inst_create(char *inst);
 void	ft_inst_addback(t_inst **data, t_inst *elem);
-void	ft_inst_popback(t_inst *data);
+void	ft_inst_popbackback(t_inst *data);
 void	ft_inst_clear(t_inst **data);
 void	ft_inst_print(int fd, t_inst *data);
 ```
