@@ -6,15 +6,15 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 18:40:50 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/15 18:38:31 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:17:14 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-static int ft_magic_len(char *str, int *sign)
+static int	ft_magic_len(char *str, int *sign)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (str[0] == '-' || str[0] == '+')
@@ -31,7 +31,7 @@ static int ft_magic_len(char *str, int *sign)
 static int	ft_check_numbers(t_inst *arg)
 {
 	int	len;
-	int sign;
+	int	sign;
 
 	sign = 0;
 	while (arg)
@@ -68,7 +68,7 @@ static int	ft_check_double(t_inst *arg)
 	return (EXIT_SUCCESS);
 }
 
-int ft_checking(t_stack **stack, char **av, int size)
+int	ft_checking(t_stack **stack, char **av, int size)
 {
 	t_inst	*arg;
 	int		ret;

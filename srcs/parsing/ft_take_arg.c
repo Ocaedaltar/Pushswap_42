@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 12:38:51 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/15 18:45:59 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:17:29 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static t_inst	*ft_take_av(char *str)
 
 int	ft_take_arg(t_inst **arg, char **av, int ac)
 {
-	int	index;
-	t_inst *elem;
+	int		index;
+	t_inst	*elem;
 
 	index = 0;
 	while (index < ac)

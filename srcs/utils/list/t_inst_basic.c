@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 10:40:54 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/15 18:44:04 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:32:52 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_inst_addback(t_inst **data, t_inst *elem)
 	}
 }
 
-void	ft_inst_popbackback(t_inst *data)
+void	ft_inst_popback(t_inst *data)
 {
 	t_inst	*prev;
 	t_inst	*last;

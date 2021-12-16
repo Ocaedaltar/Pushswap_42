@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 11:46:43 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/15 18:55:52 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:51:00 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ void	_rx(t_inst **inst, t_stack **sa, t_stack **sb, int move)
 	if (move == A)
 	{
 		ft_rotate(sa);
-		ft_inst_addback(inst, ft_inst_create("ra"));
+		ft_inst_addback(inst, ft_inst_create("ra\n"));
 	}
 	else if (move == B)
 	{
 		ft_rotate(sb);
-		ft_inst_addback(inst, ft_inst_create("rb"));
+		ft_inst_addback(inst, ft_inst_create("rb\n"));
 	}
 	else if (move == R)
 	{
 		ft_rotate(sa);
 		ft_rotate(sb);
-		ft_inst_addback(inst, ft_inst_create("rr"));
+		ft_inst_addback(inst, ft_inst_create("rr\n"));
 	}
 }
 
@@ -37,18 +37,18 @@ void	_rrx(t_inst **inst, t_stack **sa, t_stack **sb, int move)
 	if (move == A)
 	{
 		ft_reverse_rotate(sa);
-		ft_inst_addback(inst, ft_inst_create("rra"));
+		ft_inst_addback(inst, ft_inst_create("rra\n"));
 	}
 	else if (move == B)
 	{
 		ft_reverse_rotate(sb);
-		ft_inst_addback(inst, ft_inst_create("rrb"));
+		ft_inst_addback(inst, ft_inst_create("rrb\n"));
 	}
 	else if (move == R)
 	{
 		ft_reverse_rotate(sa);
 		ft_reverse_rotate(sb);
-		ft_inst_addback(inst, ft_inst_create("rrr"));
+		ft_inst_addback(inst, ft_inst_create("rrr\n"));
 	}
 }
 
@@ -57,18 +57,18 @@ void	_sx(t_inst **inst, t_stack **sa, t_stack **sb, int move)
 	if (move == A)
 	{
 		ft_swap(sa);
-		ft_inst_addback(inst, ft_inst_create("sa"));
+		ft_inst_addback(inst, ft_inst_create("sa\n"));
 	}
 	else if (move == B)
 	{
 		ft_swap(sb);
-		ft_inst_addback(inst, ft_inst_create("sb"));
+		ft_inst_addback(inst, ft_inst_create("sb\n"));
 	}
 	else if (move == R)
 	{
 		ft_swap(sa);
 		ft_swap(sb);
-		ft_inst_addback(inst, ft_inst_create("ss"));
+		ft_inst_addback(inst, ft_inst_create("ss\n"));
 	}
 }
 
@@ -77,12 +77,12 @@ void	_px(t_inst **inst, t_stack **sa, t_stack **sb, int move)
 	if (move == A)
 	{
 		ft_push(sa, sb);
-		ft_inst_addback(inst, ft_inst_create("pa"));
+		ft_inst_addback(inst, ft_inst_create("pa\n"));
 	}
 	else if (move == B)
 	{
 		ft_push(sb, sa);
-		ft_inst_addback(inst, ft_inst_create("pb"));
+		ft_inst_addback(inst, ft_inst_create("pb\n"));
 	}
 }
 

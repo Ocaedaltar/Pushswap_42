@@ -6,7 +6,7 @@
 #    By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 21:34:13 by mlormois          #+#    #+#              #
-#    Updated: 2021/12/04 05:14:05 by mlormois         ###   ########.fr        #
+#    Updated: 2021/12/16 16:29:01 by mlormois         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 # --   Compilation flags  -- #
 CC			=	clang
-FLAGS		=   -Wall -Wextra -Werror
+CFLAGS		=   -Wall -Wextra -Werror
 
 # **************************************************************************** #
 
@@ -37,10 +37,10 @@ all : $(NAME)
 
 # **************************************************************************** #
 
-$(NAME): $(OBJS) $(INC_DIR)/*.h
+$(NAME): $(OBJS) $(INC_DIR)/pushswap.h
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INC_DIR)
 
-$(OBJ_DIR)/%.o: %.c $(INC_DIR)/*.h | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c $(INC_DIR)/pushswap.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR)
 
 $(OBJ_DIR) :

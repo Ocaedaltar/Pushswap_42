@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:35:33 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/04 05:54:32 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:22:15 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	error_msg(char *str)
 void	error_parsing(t_inst **data, char *msg)
 {
 	ft_inst_clear(data);
-	exit(error_msg(NULL));
+	exit(error_msg(msg));
 }
 
 void	error_create(t_stack **data, char *msg)
 {
 	ft_stack_clear(data);
-	exit(error_msg(NULL));
+	exit(error_msg(msg));
 }
