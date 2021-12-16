@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:33:40 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 16:05:33 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:39:57 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_push_to_a(int n)
 	i = 0;
 	while (i < n)
 	{
-		write(1, "pa\n", 4);
+		write(1, "pa\n", 3);
 		i++;
 	}
 }
@@ -58,7 +58,11 @@ void	ft_medium_sort(t_stack *stack, int size)
 	cpy_stack_a = ft_stackdup(stack);
 	ft_split_to_bm(&cpy_stack_a, &cpy_stack_b, size);
 	size_b = ft_stack_size(cpy_stack_b);
+	if (!ft_isvalide_stack(stack, ASC))
+		ft_stack_clear(&cpy_stack_a);
 	ft_small_sort(cpy_stack_a, 0);
+	if (!ft_isvalide_stack(stack, DEC))
+		ft_stack_clear(&cpy_stack_b);
 	ft_small_sort(cpy_stack_b, 1);
 	ft_push_to_a(size_b);
 	ft_stack_clear(&stack);

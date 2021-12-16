@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 10:13:35 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 17:55:30 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:39:19 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_check_possibility_rev(t_stack *stack, t_inst *lst_inst)
 
 static int	ft_next_gen_rev(char *move, t_stack *stack, t_inst **lst, int *dp)
 {
-	if (!ft_strcmp(move, "sb"))
+	if (!ft_strcmp(move, "sb\n"))
 	{
 		if (ft_gen_rev(stack, lst, "rb\n", dp) == EXIT_SUCCESS)
 			return (EXIT_SUCCESS);

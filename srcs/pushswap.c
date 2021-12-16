@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 21:49:05 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 17:56:32 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:32:50 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,16 @@ static int	ft_pushswap(int size, t_stack *stack)
 	if (ft_isvalide_stack(stack, ASC))
 	{		
 		if (size < LIM_SMALL)
-		{
 			ft_small_sort(stack, 0);
-		}
 		else if (size < LIM_MEDIUM)
 		{
 			if (ft_small_sort(stack, 0))
 				ft_medium_sort(stack, size);
 		}
-		// else
-		// {
-		//	printf("Big\n");
-		// 	ft_big_sort(stack, size);
-		// }
+		else
+		{
+			ft_big_sort(stack, size);
+		}
 	}
 	return (EXIT_SUCCESS);
 }

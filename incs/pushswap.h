@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 21:48:28 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 17:44:45 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/16 20:10:56 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,26 +100,27 @@ void	ft_push(t_stack **stack_a, t_stack **stack_b);
 // ------------------------------------------ //
 // ------------   DISPLAYABLE   ------------- //
 void	ft_inst_print(int fd, t_inst *data);
+void	ft_stack_print(t_stack *data);
 
 // ------------------------------------------ //
 // ---------------   UTILS   ---------------- //
+
+int		ft_last_value(t_stack *s);
+int		ft_place_value(t_stack *s, int value);
+int		ft_take_value(t_stack *s, int n);
 int		ft_isvalide_stack(t_stack *stack, int opt);
 int		ft_search_median(t_stack *stack);
 
 t_stack	*ft_stackdup(t_stack *list);
 t_stack	*ft_create_stack_a(t_inst *arg);
 
-
-
 // ------------------------------------------ //
 // ---------------   BIG SORT   ------------- //
-void	ft_push_to_b(t_stack **sa, t_stack **sb, t_stack *plssc);
-void 	ft_replace_stack(t_stack **sa);
-int		ft_take_value(t_stack *s, int n);
-int		ft_place_value(t_stack *s, int value);
-void	ft_make_inst(t_stack **sa, t_stack **sb, int *ct, int met);
-// void	ft_plssc(t_stack **plssc, t_stack *sa, int size);
-// void	ft_big_sort(t_stack *sa, int size);
+t_inst 	*ft_replace_stack(t_stack **sa);
+t_inst	*ft_make_inst(t_stack **sa, t_stack **sb, int *ct, int met);
+t_inst	*ft_fill_b(t_stack **sa, t_stack **sb, t_stack *pls);
+void	ft_plssc(t_stack **plssc, t_stack *sa, int size);
+void	ft_big_sort(t_stack *sa, int size);
 
 // ------------------------------------------ //
 // -------------   LITTLE SORT   ------------ //

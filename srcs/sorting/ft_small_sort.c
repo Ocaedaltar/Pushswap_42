@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 10:42:48 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 17:56:39 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:36:22 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	ft_small_sort(t_stack *stack, int opt)
 	t_inst	*inst;
 
 	inst = NULL;
+	if (!stack)
+		return (EXIT_FAILURE);
 	if (opt == 0 && ft_isvalide_stack(stack, ASC))
 		inst = ft_bt_solution(stack, 0, 14);
 	else if (opt == 1 && ft_isvalide_stack(stack, DEC))
