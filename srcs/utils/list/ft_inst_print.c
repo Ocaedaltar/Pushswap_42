@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 17:03:12 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 20:10:48 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/23 17:33:10 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,21 @@ static int	ft_count_data(t_inst *data)
 	i = 0;
 	while (data)
 	{
-		printf("%d\n", i);
 		i += ft_strlen(data->inst);
 		data = data->next;
 	}
 	return (i);
 }
 
-static void ft_fill_str(char **str, t_inst *data)
+static void ft_fill_str(char **str, t_inst *data, int len_str)
 {
-	int index;
-	int i;
+	int	index;
+	int	i;
 
 	index = 0;
+	(*str) = (char *)malloc(sizeof(char) * (len_str + 1));;
+	if (!(*str))
+		error_parsing(&data, NULL);
 	while (data)
 	{
 		i = -1;
@@ -79,18 +81,9 @@ void	ft_inst_print(int fd, t_inst *data)
 {
 	char	*str;
 	int		len_str;
-
-
-	printf("Count\n");
-	len_str = ft_count_data(data);
-
-	printf("Len: %d\n Malloc\n", len_str);
-	str = (char *)malloc(sizeof(char) * (len_str + 1));;
-	if (!str)
-		error_parsing(&data, NULL);
-	printf("Fill\n");
-	ft_fill_str(&str, data);
-	printf("STR\n");
+\
+	len_str = ft_count_data(data);\
+	ft_fill_str(&str, data, len_str);
 	write(fd, str, len_str);
 	free(str);
 }

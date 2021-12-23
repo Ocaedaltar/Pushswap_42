@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:40:57 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 20:14:38 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/22 13:33:57 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	ft_more(t_inst **inst, t_stack **sa, t_stack **sb, t_stack *pls)
 	{
 		if ((*sa)->value == last)
 			flag = 1;
-		if ((*sa)->value > med && ft_stack_ison(pls, (*sa)->value))
+		if ((*sa)->value > med && !ft_stack_ison(pls, (*sa)->value))
 			_px(inst, sa, sb, B);
 		else
 			_rx(inst, sa, sb, A);
@@ -56,7 +56,7 @@ static void	ft_rest(t_inst **inst, t_stack **sa, t_stack **sb, t_stack *pls)
 	{
 		if ((*sa)->value == last)
 			flag = 1;
-		if (ft_stack_ison(pls, (*sa)->value))
+		if (!ft_stack_ison(pls, (*sa)->value))
 			_px(inst, sa, sb, B);
 		else
 			_rx(inst, sa, sb, A);

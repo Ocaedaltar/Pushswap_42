@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 21:48:28 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 20:10:56 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/23 17:28:10 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 // ------------------------------------------ //
 // ---------------  DEFINE   ---------------- //
-# define LIM_SMALL	7
-# define LIM_MEDIUM	14
+# define LIM_SMALL	6
+# define LIM_MEDIUM	12
 
 # define INT_MAX "2147483647"
 # define INT_MIN "2147483648"

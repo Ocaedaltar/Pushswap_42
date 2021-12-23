@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:53:12 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 19:13:06 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/23 17:28:43 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_inst *ft_replace_stack(t_stack **sa)
 	int	cra;
 	int	crra;
 
+	inst = NULL;
 	min_value = ft_min_value(*sa);
 	cra = ft_count_value(*sa, min_value, 0);
 	crra = ft_count_value(*sa, min_value, 1);
