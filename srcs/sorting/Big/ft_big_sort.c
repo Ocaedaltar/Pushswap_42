@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 12:29:32 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/23 17:32:15 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/24 18:15:37 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,17 @@ static int ft_set_counter(int **ct)
 **  deviens egale a mon index dans la stack. ( le nombre de RB || RRB ).
 */
 
-void ft_print_ct(int *ct)
-{
-	printf("RA = %d\n", ct[RA]);
-	printf("RB = %d\n", ct[RB]);
-	printf("RR = %d\n", ct[RR]);
-	printf("RRA = %d\n", ct[RRA]);
-	printf("RRB = %d\n", ct[RRB]);
-	printf("RRR = %d\n", ct[RRR]);
-	printf("METH = %d\n", ct[MET]);
-	printf("NI = %d\n", ct[NI]);
-}
+// void ft_print_ct(int *ct)
+// {
+// 	printf("RA = %d\n", ct[RA]);
+// 	printf("RB = %d\n", ct[RB]);
+// 	printf("RR = %d\n", ct[RR]);
+// 	printf("RRA = %d\n", ct[RRA]);
+// 	printf("RRB = %d\n", ct[RRB]);
+// 	printf("RRR = %d\n", ct[RRR]);
+// 	printf("METH = %d\n", ct[MET]);
+// 	printf("NI = %d\n", ct[NI]);
+// }
 
 static t_inst *ft_best_push(t_stack **sa, t_stack **sb, int len_sb)
 {
@@ -128,72 +128,22 @@ static t_inst *ft_best_push(t_stack **sa, t_stack **sb, int len_sb)
 ** 4. Replace, je replace ma stack avec la valeur MIN en premiere.
 */
 
-void ft_plssc(t_stack **plssc, t_stack *sa, int size)
-{
-	(void)size;
-	t_stack *tmp;
-
-	int min = atoi(INT_MAX);
-	int max = atoi(INT_MIN) * -1;
-
-
-	tmp = sa;
-	while (tmp)
-	{
-		if (tmp->value < min)
-			min = tmp->value;
-		tmp = tmp->next;
-	}
-	tmp = sa;
-	while (tmp)
-	{
-		if (tmp->value > max)
-			max = tmp->value;
-		tmp = tmp->next;
-	}
-	ft_stack_addback(plssc, ft_stack_create(min));
-	ft_stack_addback(plssc, ft_stack_create(max));
-}
-
 void	ft_big_sort(t_stack *sa, int size)
 {
 	t_inst	*inst;
 	t_stack	*sb;
 	t_stack	*plssc;
 
-	size = 0;
 	inst = NULL;
 	sb = NULL;
 	plssc = NULL;
-
-	// printf("STEP 1\n");
-	
-	// JE CHERCHE LA PLSSC
 	ft_plssc(&plssc, sa, size);
-
-	// printf("STEP 2\n");
-
-	// PUSH B
 	ft_inst_addback(&inst, ft_fill_b(&sa, &sb, plssc));
 	ft_stack_clear(&plssc);
-
-	// ft_stack_print(sa);
-	// ft_stack_print(sb);
-	// ft_inst_print(STDOUT_FILENO, inst);
-
-	// printf("STEP 3\n");
-
 	while (sb != NULL)
 		ft_inst_addback(&inst, ft_best_push(&sa, &sb, ft_stack_size(sb)));
-
-	// printf("STEP 4\n");
-	
 	ft_inst_addback(&inst, ft_replace_stack(&sa));
-
-	// printf("STEP 5\n");
-	
-	// ft_stack_print(sa);
-	ft_inst_print(STDOUT_FILENO, inst);
+	//ft_inst_print(STDOUT_FILENO, inst);
 	ft_stack_clear(&sa);
 	ft_inst_clear(&inst);
 }

@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 21:48:28 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/23 17:28:10 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/24 18:02:19 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	ft_stack_print(t_stack *data);
 
 // ------------------------------------------ //
 // ---------------   UTILS   ---------------- //
-
 int		ft_last_value(t_stack *s);
 int		ft_place_value(t_stack *s, int value);
 int		ft_take_value(t_stack *s, int n);

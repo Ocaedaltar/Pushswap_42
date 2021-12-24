@@ -6,7 +6,7 @@
 #    By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 21:34:13 by mlormois          #+#    #+#              #
-#    Updated: 2021/12/16 16:29:01 by mlormois         ###   ########.fr        #
+#    Updated: 2021/12/24 18:13:29 by mlormois         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 # --   Compilation flags  -- #
 CC			=	clang
-CFLAGS		=   -Wall -Wextra -Werror
+CFLAGS		=   -Wall -Wextra -Werror -g3 -fsanitize=address -fsanitize=undefined
 
 # **************************************************************************** #
 
