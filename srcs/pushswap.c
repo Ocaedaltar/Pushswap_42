@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 21:49:05 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 18:32:50 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:07:03 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ static int	ft_pushswap(int size, t_stack *stack)
 		}
 		else
 		{
-			ft_big_sort(stack, size);
+			ft_big_sort(stack);
 		}
 	}
 	return (EXIT_SUCCESS);
 }
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_stack *stack;
+	t_stack	*stack;
 
 	stack = NULL;
 	if (ac > 1 && !ft_checking(&stack, av + 1, ac - 1))

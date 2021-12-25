@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 12:29:32 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/24 18:15:37 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:05:35 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_remplace_counter(int **ct, int *nc)
 **	TIPS : Brancheless pour eviter les conditions.
 */
 
-static int	ft_search_push(t_stack *sa, t_stack *sb, int index, int **ct)
+static void	ft_search_push(t_stack *sa, t_stack *sb, int index, int **ct)
 {
 	int		nc[8];
 	int		tot[4];
@@ -52,14 +52,13 @@ static int	ft_search_push(t_stack *sa, t_stack *sb, int index, int **ct)
 		+ tot[2] * (nc[MET] == 2) + tot[3] * (nc[MET] == 3);
 	if (nc[NI] < (*ct)[NI])
 		ft_remplace_counter(ct, nc);
-	return ((*ct)[NI]);
 }
 
 /*	Une Simple Initialisation de mon tableau de compteur.
 **	Je me sert de mon enum pour savoir a quoi correspond chaque int de mon tab.
 */
 
-static int ft_set_counter(int **ct)
+static int	ft_set_counter(int **ct)
 {
 	(*ct) = (int *)malloc(sizeof(int) * 8);
 	if (!(*ct))
@@ -83,35 +82,20 @@ static int ft_set_counter(int **ct)
 **  deviens egale a mon index dans la stack. ( le nombre de RB || RRB ).
 */
 
-// void ft_print_ct(int *ct)
-// {
-// 	printf("RA = %d\n", ct[RA]);
-// 	printf("RB = %d\n", ct[RB]);
-// 	printf("RR = %d\n", ct[RR]);
-// 	printf("RRA = %d\n", ct[RRA]);
-// 	printf("RRB = %d\n", ct[RRB]);
-// 	printf("RRR = %d\n", ct[RRR]);
-// 	printf("METH = %d\n", ct[MET]);
-// 	printf("NI = %d\n", ct[NI]);
-// }
-
-static t_inst *ft_best_push(t_stack **sa, t_stack **sb, int len_sb)
+static t_inst	*ft_best_push(t_stack **sa, t_stack **sb, int len_sb)
 {
 	t_inst	*inst;
-	int		nb_inst;
 	int		*ct;
 	int		i;
 
 	i = 0;
 	inst = NULL;
-	nb_inst = 2147483647;
 	if (ft_set_counter(&ct))
 		return (NULL);
-	while (i < nb_inst && i < len_sb)
+	while (i < ct[NI] && i < len_sb)
 	{
-		nb_inst = ft_search_push(*sa, *sb, i, &ct);
-		if (len_sb > 1)
-			nb_inst = ft_search_push(*sa, *sb, len_sb - i - 1, &ct);
+		ft_search_push(*sa, *sb, i, &ct);
+		ft_search_push(*sa, *sb, len_sb - i - 1, &ct);
 		i++;
 	}
 	inst = ft_make_inst(sa, sb, ct, ct[MET]);
@@ -128,22 +112,18 @@ static t_inst *ft_best_push(t_stack **sa, t_stack **sb, int len_sb)
 ** 4. Replace, je replace ma stack avec la valeur MIN en premiere.
 */
 
-void	ft_big_sort(t_stack *sa, int size)
+void	ft_big_sort(t_stack *sa)
 {
 	t_inst	*inst;
 	t_stack	*sb;
-	t_stack	*plssc;
 
 	inst = NULL;
 	sb = NULL;
-	plssc = NULL;
-	ft_plssc(&plssc, sa, size);
-	ft_inst_addback(&inst, ft_fill_b(&sa, &sb, plssc));
-	ft_stack_clear(&plssc);
+	ft_inst_addback(&inst, ft_fill_b(&sa, &sb));
 	while (sb != NULL)
 		ft_inst_addback(&inst, ft_best_push(&sa, &sb, ft_stack_size(sb)));
 	ft_inst_addback(&inst, ft_replace_stack(&sa));
-	//ft_inst_print(STDOUT_FILENO, inst);
+	ft_inst_print(STDOUT_FILENO, inst);
 	ft_stack_clear(&sa);
 	ft_inst_clear(&inst);
 }

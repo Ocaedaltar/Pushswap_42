@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 12:42:30 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/23 17:31:46 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:06:27 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	ft_methode_zero(t_inst **inst, t_stack **sa, t_stack **sb, int *ct)
 
 t_inst	*ft_make_inst(t_stack **sa, t_stack **sb, int *ct, int met)
 {
-	t_inst *inst;
+	t_inst	*inst;
 
 	inst = NULL;
 	if (met == 1)

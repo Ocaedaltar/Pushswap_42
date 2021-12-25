@@ -6,14 +6,14 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 21:48:28 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/24 18:02:19 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:02:04 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 
-#include <stdio.h>
+# include <stdio.h>
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -84,6 +84,7 @@ void	ft_stack_addfront(t_stack **data, t_stack *elem);
 void	ft_stack_addback(t_stack **data, t_stack *elem);
 int		ft_stack_size(t_stack *data);
 void	ft_stack_clear(t_stack **data);
+void	ft_stack_popback(t_stack **data);
 
 // -------------------------------------------- //
 void	_rx(t_inst **inst, t_stack **sa, t_stack **sb, int move);
@@ -104,6 +105,9 @@ void	ft_stack_print(t_stack *data);
 
 // ------------------------------------------ //
 // ---------------   UTILS   ---------------- //
+int		ft_max_value(t_stack *s);
+int		ft_min_value(t_stack *s);
+
 int		ft_last_value(t_stack *s);
 int		ft_place_value(t_stack *s, int value);
 int		ft_take_value(t_stack *s, int n);
@@ -115,11 +119,10 @@ t_stack	*ft_create_stack_a(t_inst *arg);
 
 // ------------------------------------------ //
 // ---------------   BIG SORT   ------------- //
-t_inst 	*ft_replace_stack(t_stack **sa);
+t_inst	*ft_replace_stack(t_stack **sa);
 t_inst	*ft_make_inst(t_stack **sa, t_stack **sb, int *ct, int met);
-t_inst	*ft_fill_b(t_stack **sa, t_stack **sb, t_stack *pls);
-void	ft_plssc(t_stack **plssc, t_stack *sa, int size);
-void	ft_big_sort(t_stack *sa, int size);
+t_inst	*ft_fill_b(t_stack **sa, t_stack **sb);
+void	ft_big_sort(t_stack *sa);
 
 // ------------------------------------------ //
 // -------------   LITTLE SORT   ------------ //

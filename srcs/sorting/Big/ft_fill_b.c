@@ -6,13 +6,13 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:40:57 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/22 13:33:57 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:05:07 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-static int ft_stack_ison(t_stack *pls, int value)
+static int	ft_stack_ison(t_stack *pls, int value)
 {
 	if (!pls)
 		return (EXIT_FAILURE);
@@ -63,12 +63,33 @@ static void	ft_rest(t_inst **inst, t_stack **sa, t_stack **sb, t_stack *pls)
 	}
 }
 
-t_inst	*ft_fill_b(t_stack **sa, t_stack **sb, t_stack *pls)
+//	ICI : une grosse Optimisation a faire:
+// 
+//	Trouver la plus longue sous-suite croissante dans la stack A
+//  En faire une copie que vous garderais. 
+//
+
+static void	ft_plssc(t_stack **plssc, t_stack *sa)
 {
-	t_inst *inst;
+	int	min;
+	int	max;
+
+	min = ft_min_value(sa);
+	max = ft_max_value(sa);
+	ft_stack_addback(plssc, ft_stack_create(min));
+	ft_stack_addback(plssc, ft_stack_create(max));
+}
+
+t_inst	*ft_fill_b(t_stack **sa, t_stack **sb)
+{
+	t_inst	*inst;
+	t_stack	*plssc;
 
 	inst = NULL;
-	ft_more(&inst, sa, sb, pls);
-	ft_rest(&inst, sa, sb, pls);
+	plssc = NULL;
+	ft_plssc(&plssc, *sa);
+	ft_more(&inst, sa, sb, plssc);
+	ft_rest(&inst, sa, sb, plssc);
+	ft_stack_clear(&plssc);
 	return (inst);
 }

@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:31:34 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/15 18:44:42 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 18:56:19 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 */
 
 // TODO PROTEGER LE FAILE DU DUP
+
+int	ft_last_value(t_stack *s)
+{
+	while (s->next)
+		s = s->next;
+	return (s->value);
+}
 
 t_stack	*ft_stackdup(t_stack *list)
 {
@@ -51,4 +58,25 @@ t_stack	*ft_create_stack_a(t_inst *arg)
 		arg = arg->next;
 	}
 	return (lst);
+}
+
+void	ft_stack_popback(t_stack **data)
+{
+	t_stack	*prev;
+	t_stack	*last;
+
+	if (data)
+	{
+		prev = NULL;
+		last = (*data);
+		while (last->next)
+		{
+			prev = last;
+			last = last->next;
+		}
+		if (prev)
+			prev->next = NULL;
+		free(last);
+		last = NULL;
+	}
 }

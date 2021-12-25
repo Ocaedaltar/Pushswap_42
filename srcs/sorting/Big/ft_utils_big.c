@@ -6,41 +6,46 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:47:46 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/23 16:55:28 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 15:29:59 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	ft_last_value(t_stack *s)
-{
-	while (s->next)
-		s = s->next;
-	return (s->value);
-}
-
-
-int	ft_take_value(t_stack *s, int n)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (-1);
-	while (s->next && i < n)
-	{
-		s = s->next;
-		i++;
-	}
-	return (s->value);
-}
-
-static	int	ft_while_minus_value(t_stack *s, int value)
+static	int	ft_while_lower(t_stack *s, int value, int inc)
 {
 	int	move;
 
 	move = 0;
+	while (inc-- > 0)
+		s = s->next;
 	while (s && s->value < value)
+	{
+		move++;
+		s = s->next;
+	}
+	return (move);
+}
+
+static	int	ft_while_upper(t_stack *s, int value)
+{
+	int	move;
+
+	move = 0;
+	while (s && s->value > value)
+	{
+		move++;
+		s = s->next;
+	}
+	return (move);
+}
+
+static	int	ft_while_notegal(t_stack *s, int value)
+{
+	int	move;
+
+	move = 0;
+	while (s && s->value != value)
 	{
 		move++;
 		s = s->next;
@@ -51,20 +56,24 @@ static	int	ft_while_minus_value(t_stack *s, int value)
 int	ft_place_value(t_stack *s, int value)
 {
 	int	move;
+	int	min_sa;
+	int	max_sa;
 
 	move = 0;
-	if (s->value < value)
-		move = ft_while_minus_value(s, value);
-	else
+	min_sa = ft_min_value(s);
+	max_sa = ft_max_value(s);
+	if (!s || !s->next)
+		return (move);
+	else if (value < min_sa)
+		move = ft_while_notegal(s, min_sa);
+	else if (value > max_sa)
+		move = ft_while_notegal(s, min_sa) + 1;
+	else if (s->value < value)
+		move = ft_while_lower(s, value, 0);
+	else if (!(ft_last_value(s) < value))
 	{
-		if (ft_last_value(s) < value)
-			return (move);
-		while (s && s->value > value)
-		{
-			move++;
-			s = s->next;
-		}	
-		move += ft_while_minus_value(s, value);
+		move += ft_while_upper(s, value);
+		move += ft_while_lower(s, value, move);
 	}
 	return (move);
 }

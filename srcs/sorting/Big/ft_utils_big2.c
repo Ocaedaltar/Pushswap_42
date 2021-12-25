@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:53:12 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/23 17:28:43 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:06:11 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int	ft_count_value(t_stack *stack, int value, int opt)
 	return (value_after);
 }
 
-static int ft_min_value(t_stack *s)
+int	ft_min_value(t_stack *s)
 {
-	int min;
+	int	min;
 
 	min = s->value;
 	while (s)
@@ -48,12 +48,26 @@ static int ft_min_value(t_stack *s)
 	return (min);
 }
 
-t_inst *ft_replace_stack(t_stack **sa)
+int	ft_max_value(t_stack *s)
 {
-	t_inst *inst;
-	int	min_value;
-	int	cra;
-	int	crra;
+	int	max;
+
+	max = s->value;
+	while (s)
+	{
+		if (s->value > max)
+			max = s->value;
+		s = s->next;
+	}
+	return (max);
+}
+
+t_inst	*ft_replace_stack(t_stack **sa)
+{
+	t_inst	*inst;
+	int		min_value;
+	int		cra;
+	int		crra;
 
 	inst = NULL;
 	min_value = ft_min_value(*sa);
@@ -67,4 +81,19 @@ t_inst *ft_replace_stack(t_stack **sa)
 		while (min_value-- > 0)
 			_rrx(&inst, sa, NULL, A);
 	return (inst);
+}
+
+int	ft_take_value(t_stack *s, int n)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (-1);
+	while (s->next && i < n)
+	{
+		s = s->next;
+		i++;
+	}
+	return (s->value);
 }

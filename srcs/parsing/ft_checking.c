@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 18:40:50 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 15:17:14 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:04:52 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_check_numbers(t_inst *arg)
 		len = ft_magic_len(arg->inst, &sign);
 		len = ft_strlen(arg->inst + len);
 		if (len == 10 && ((!sign && ft_strcmp(INT_MAX, arg->inst) < 0)
-			|| (sign && ft_strcmp(INT_MIN, arg->inst) < 0)))
+				|| (sign && ft_strcmp(INT_MIN, arg->inst) < 0)))
 			return (EXIT_FAILURE);
 		else if (len > 11)
 			return (EXIT_FAILURE);

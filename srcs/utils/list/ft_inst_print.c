@@ -6,48 +6,15 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 17:03:12 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/23 17:33:10 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:03:32 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-// PRINT OPTI : 
-// je vais parcourir ma list de facon recursive pour compte et imprimer dans une str
-// le comptenue de chaque nodes de mq liste
-
-// static void	ft_memprint(char **dst, char *src, int index, int len)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (++i < len)
-// 		(*dst)[index + i] = src[i];
-// }
-
-// static int ft_merge_rec(char **str, t_inst *data, int index)
-// {
-// 	int i;
-// 	int ret;
-
-// 	if (data)
-// 	{
-// 		i = ft_strlen(data->inst);
-// 		ret = ft_merge_rec(str, data->next, index + i);
-// 		ft_memprint(str, data->inst, index, i);
-// 		return (ret);
-// 	}
-// 	else
-// 	{
-// 		(*str) = (char *)malloc(sizeof(char) * (index + 1));
-// 		(*str)[index] = '\0';
-// 	}
-// 	return (index);
-// }
-
 static int	ft_count_data(t_inst *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (data)
@@ -58,13 +25,13 @@ static int	ft_count_data(t_inst *data)
 	return (i);
 }
 
-static void ft_fill_str(char **str, t_inst *data, int len_str)
+static void	ft_fill_str(char **str, t_inst *data, int len_str)
 {
 	int	index;
 	int	i;
 
 	index = 0;
-	(*str) = (char *)malloc(sizeof(char) * (len_str + 1));;
+	(*str) = (char *)malloc(sizeof(char) * (len_str + 1));
 	if (!(*str))
 		error_parsing(&data, NULL);
 	while (data)
@@ -81,13 +48,12 @@ void	ft_inst_print(int fd, t_inst *data)
 {
 	char	*str;
 	int		len_str;
-\
-	len_str = ft_count_data(data);\
+
+	len_str = ft_count_data(data);
 	ft_fill_str(&str, data, len_str);
 	write(fd, str, len_str);
 	free(str);
 }
-
 
 void	ft_stack_print(t_stack *data)
 {

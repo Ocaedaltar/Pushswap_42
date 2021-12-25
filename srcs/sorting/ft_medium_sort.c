@@ -6,13 +6,13 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:33:40 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 19:39:57 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:06:45 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-static int ft_split_to_bm(t_stack **sa, t_stack **sb, int size)
+static int	ft_split_to_bm(t_stack **sa, t_stack **sb, int size)
 {
 	int		median;
 	t_inst	*inst;
