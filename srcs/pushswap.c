@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 21:49:05 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/25 22:07:03 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 23:16:44 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static int	ft_pushswap(int size, t_stack *stack)
 				ft_medium_sort(stack, size);
 		}
 		else
-		{
 			ft_big_sort(stack);
-		}
 	}
+	else
+		ft_stack_clear(&stack);
 	return (EXIT_SUCCESS);
 }
 

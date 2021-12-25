@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:35:33 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/16 16:22:15 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:22:24 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 
 int	error_msg(char *str)
 {
-	write(2, "Error\n", 7);
+	write(STDERR_FILENO, "Error\n", ft_strlen("Error\n"));
 	if (str)
 	{
-		write(2, str, ft_strlen(str));
-		write(2, "\n", 1);
+		write(STDERR_FILENO, str, ft_strlen(str));
+		write(STDERR_FILENO, "\n", 1);
 	}
 	return (1);
 }

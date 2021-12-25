@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:40:57 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/25 22:05:07 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 23:15:28 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,27 @@ static void	ft_rest(t_inst **inst, t_stack **sa, t_stack **sb, t_stack *pls)
 	}
 }
 
-//	ICI : une grosse Optimisation a faire:
-// 
-//	Trouver la plus longue sous-suite croissante dans la stack A
-//  En faire une copie que vous garderais. 
-//
-
 static void	ft_plssc(t_stack **plssc, t_stack *sa)
 {
-	int	min;
-	int	max;
+	int		min;
+	t_stack	*super_stack;
+	t_stack	*ptr_start;
 
 	min = ft_min_value(sa);
-	max = ft_max_value(sa);
-	ft_stack_addback(plssc, ft_stack_create(min));
-	ft_stack_addback(plssc, ft_stack_create(max));
+	super_stack = ft_stackdup(sa);
+	ft_stack_addback(&super_stack, ft_stackdup(sa));
+	ptr_start = super_stack;
+	while (super_stack->value != min)
+		super_stack = super_stack->next;
+	ft_stack_addfront(plssc, ft_stack_create(super_stack->value));
+	super_stack = super_stack->next;
+	while (super_stack->value != min)
+	{
+		if (super_stack->value > (*plssc)->value)
+			ft_stack_addfront(plssc, ft_stack_create(super_stack->value));
+		super_stack = super_stack->next;
+	}
+	ft_stack_clear(&ptr_start);
 }
 
 t_inst	*ft_fill_b(t_stack **sa, t_stack **sb)

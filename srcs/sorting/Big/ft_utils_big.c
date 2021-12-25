@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:47:46 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/25 15:29:59 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:38:05 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_place_value(t_stack *s, int value)
 	else if (value < min_sa)
 		move = ft_while_notegal(s, min_sa);
 	else if (value > max_sa)
-		move = ft_while_notegal(s, min_sa) + 1;
+		move = ft_while_notegal(s, max_sa) + 1;
 	else if (s->value < value)
 		move = ft_while_lower(s, value, 0);
 	else if (!(ft_last_value(s) < value))

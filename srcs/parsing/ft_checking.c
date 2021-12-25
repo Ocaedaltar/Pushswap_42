@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@studient.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 18:40:50 by mlormois          #+#    #+#             */
-/*   Updated: 2021/12/25 22:04:52 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:26:05 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	ft_check_numbers(t_inst *arg)
 	sign = 0;
 	while (arg)
 	{
+		if (!ft_strcmp("-", arg->inst) || !ft_strcmp("+", arg->inst))
+			return (EXIT_FAILURE);
 		if (ft_isnumber(arg->inst))
 			return (EXIT_FAILURE);
 		len = ft_magic_len(arg->inst, &sign);
