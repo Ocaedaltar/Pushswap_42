@@ -31,6 +31,7 @@ static int	ft_magic_len(char *str, int *sign)
 static int	ft_check_numbers(t_inst *arg)
 {
 	int	len;
+	int	mlen;
 	int	sign;
 
 	sign = 0;
@@ -40,12 +41,12 @@ static int	ft_check_numbers(t_inst *arg)
 			return (EXIT_FAILURE);
 		if (ft_isnumber(arg->inst))
 			return (EXIT_FAILURE);
-		len = ft_magic_len(arg->inst, &sign);
-		len = ft_strlen(arg->inst + len);
-		if (len == 10 && ((!sign && ft_strcmp(INT_MAX, arg->inst) < 0)
-				|| (sign && ft_strcmp(INT_MIN, arg->inst + sign) < 0)))
+		mlen = ft_magic_len(arg->inst, &sign);
+		len = ft_strlen(arg->inst + mlen);
+		if (len == 10 && ((!sign && ft_strcmp(INT_MAX, arg->inst + mlen) < 0)
+				|| (sign && ft_strcmp(INT_MIN, arg->inst + mlen) < 0)))
 			return (EXIT_FAILURE);
-		else if (len > 11)
+		else if (len > 10)
 			return (EXIT_FAILURE);
 		arg = arg->next;
 	}
