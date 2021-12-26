@@ -21,7 +21,7 @@
 // ------------------------------------------ //
 // ---------------  DEFINE   ---------------- //
 # define LIM_SMALL	6
-# define LIM_MEDIUM	12
+# define LIM_MEDIUM	11
 
 # define INT_MAX "2147483647"
 # define INT_MIN "2147483648"
@@ -46,6 +46,13 @@ enum	e_move
 	NI
 };
 
+enum e_opt
+{
+	A = 0,
+	B,
+	R,
+};
+
 typedef struct s_inst	t_inst;
 typedef struct s_stack	t_stack;
 
@@ -63,13 +70,6 @@ struct s_stack
 {
 	int		value;
 	t_stack	*next;
-};
-
-enum e_opt
-{
-	A = 0,
-	B,
-	R,
 };
 
 // -------------------------------------------- //
