@@ -255,13 +255,15 @@ static int	ft_check_possibility(t_stack *stack, t_inst *lst_inst)
 	return (ret);
 }
 ```
-###### Si jamais vous avez des questions hesiter a me posser des questions.
+###### Si jamais vous avez des questions hesiter a me posser des questions. Faire commeca n'est pas la solution la plus simple, ni la plus optimal mais c'est un bon exercise pour utiliser la recursivite. 💡 Si vous integrer les movements PB PA RB RRB RR RRR, ca peut donner qqchose de vraiment tres preforment pour les intruction, mais ca sera tres gourmand en temps de calcule! 
 
 ### Medium Sort:
 
 Pour le medium, c'est simple. 
 je calcule la mediane et ce qui est inferieur je le push dans B, J'applique le Little sort sur la stack A
 et sur la stack B, Little sort Reverse, Reverse pour pouvoire les push dans le bon ordre dans A.
+
+###### 💡Une tres bonne opti a faire ici serait de Merge les instructions des deux Little sort, ex:  RA && RB = RR.
 
 ## Big Sort:
 
@@ -422,7 +424,6 @@ Une fois nos instruction envoyer, on peut tout free! la stack, nos intructions.
 ![end-project](https://user-images.githubusercontent.com/52299490/147415849-9653fa76-8acc-4403-a16b-3d5c14c7e0c0.jpg)
 
 Push_swap est terminer bien jouer!
-
 
 
 
