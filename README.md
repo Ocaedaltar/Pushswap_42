@@ -198,11 +198,70 @@ Rien de special, deux pointeurs et on strcmp chaque element entre eux!
 
 ## Little Sort:
 
+Pour une petite stack, je vais trier uniquement sur celle-ci ( donc pas de push dans B )
+tout simplement, je genere des instructions ( de `i` a `n` ) je duplique ma stack `ft_stackdup()` et j'applique mes intructions
+Si ca ne marche pas, je supprime la derniere et j'essaye avec une autre ( de facon recursive ). 
 
+###### C'est comme du brut force ( mais un peu guide ).
+- on ne peut pas faire deux SA d'affiller.
+- Si on fait RA on ne peut pas faire RRA.
+- Si on fait RRA on ne peut pas faire RA.
+
+Si Une instruction ne trie pas, on augmente le nombre d'instruction de 1 et on recommence! 
+
+```
+t_inst	*ft_bt_solution(t_stack *stack, int deep, int max_deep)
+{
+	t_inst	*inst;
+	int		depth[2];
+
+	inst = NULL;
+	depth[ACT] = 0;
+	depth[MAX] = deep;
+	if (ft_gen(stack, &inst, "sa\n", depth) == EXIT_SUCCESS)
+		return (inst);
+	inst = NULL;
+	if (ft_gen(stack, &inst, "ra\n", depth) == EXIT_SUCCESS)
+		return (inst);
+	inst = NULL;
+	if (ft_gen(stack, &inst, "rra\n", depth) == EXIT_SUCCESS)
+		return (inst);
+	inst = NULL;
+	if (deep < max_deep)
+		inst = ft_bt_solution(stack, deep + 1, max_deep);
+	return (inst);
+}
+```
+On s'arrete seulement quand c'est trie!
+```
+static int	ft_check_possibility(t_stack *stack, t_inst *lst_inst)
+{
+	t_stack	*stack_cpy;
+	int		ret;
+
+	stack_cpy = ft_stackdup(stack);
+	while (lst_inst)
+	{
+		if (!ft_strcmp(lst_inst->inst, "sa\n"))
+			ft_swap(&stack_cpy);
+		else if (!ft_strcmp(lst_inst->inst, "ra\n"))
+			ft_rotate(&stack_cpy);
+		else
+			ft_reverse_rotate(&stack_cpy);
+		lst_inst = lst_inst->next;
+	}
+	ret = ft_isvalide_stack(stack_cpy, ASC);
+	ft_stack_clear(&stack_cpy);
+	return (ret);
+}
+```
+###### Si jamais vous avez des questions hesiter a me posser des questions.
 
 ### Medium Sort:
 
-// WORK IN PROGRESSE
+Pour le medium, c'est simple. 
+je calcule la mediane et ce qui est inferieur je le push dans B, J'applique le Little sort sur la stack A
+et sur la stack B, Little sort Reverse, Reverse pour pouvoire les push dans le bon ordre dans A.
 
 ## Big Sort:
 
