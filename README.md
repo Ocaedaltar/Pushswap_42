@@ -1,6 +1,6 @@
 # PUSH_SWAP
 
-L'objectif de PushSwap est de partir d'une stack A donne en arguments, et de la trier dans l'ordre croissant en un minimum de coup.
+L'objectif de PushSwap est de partir d'une stack A donnee en argument, et de la trier dans l'ordre croissant en un minimum de coups.
 
 | Stack Size | 5 | 4 | 3 | 2 | 1 | 0 |
 | --- | --- |  --- | --- | --- |  --- | --- |
@@ -10,15 +10,15 @@ L'objectif de PushSwap est de partir d'une stack A donne en arguments, et de la 
 | 100 | 700 | 900 | 1100 | 1300 | 1500 | >1500 |
 | 500 | 5500 | 7000 | 8500 | 10000 | 11500 | >11500 |
 
-- ⚠️ Et Les mouvement de notre stack son limiter!
+- ⚠️ Et les mouvements de notre stack sont limites!
 
-Beaucoup vous dirons: bouboubou c'est debile, pourquoi on doit le faire avec ces mouvements?   
----> Imaginer vous que vous controller un robots, et malheureusement votre robots ne fait pas encore du breakdance
-Et bien vous devrais vous limiter a ces capacite.
+Beaucoup vous diront: Bouboubou c'est debile, pourquoi on doit le faire avec ces mouvements?   
+---> Imaginez-vous que vous controlez un robot, et malheureusement votre robot ne fait pas encore du breakdance
+Et bien vous devrez vous limiter a ces capacites.
 
 ![robotbreakdance](https://user-images.githubusercontent.com/52299490/146198572-974a1984-b3de-48e3-93b6-57b3ea08877c.jpeg)
 
-| Moves | Explication |
+| Moves | Explications |
 | --- | --- |
 | ra  | Place La tete de la stack A ( la premiere valeur ) a la fin de celle-ci |
 | rb  | Place la tete de la stack B a la fin de celle-ci |
@@ -28,18 +28,18 @@ Et bien vous devrais vous limiter a ces capacite.
 | rrr | Execute les mouvements rra && rrb |
 | sa  | Echange la premiere et la seconde valeur de la stack A |
 | sb  | Echange la premiere et la seconde valeur de la stack B |
-| ss  | Execute les mouvement sa && sb |
+| ss  | Execute les mouvements sa && sb |
 | pa  | Push la valeur en tete de la stack A en tete de la stack B |
 | pb  | Push la valeur en tete de la stack B en tete de la stack A |
 | pp  | mmmmh, non celle-ci n'existe pas... |
 
-## 💡 Les Utils :
-Dans un premier temps, je vous conseil de commencer a cree vos outils affin de vous faciliter le project.
+## 💡 Les outils :
+Dans un premier temps, je vous conseille de commencer a creer vos outils afin de vous faciliter le projet.
 Pour simuler la stack, je vais utiliser une liste chainee.
-⚠️ Vous pouvais tres bien utiliser des tableau d'entier, ca sera un peu plus difficile ( de mon point de vue ) mais bien fait beaucoup plus efficace qu'une stack!
+⚠️ Vous pouvez tres bien utiliser des tableaux d'entiers, ca sera un peu plus difficile (de mon point de vue) mais bien fait, beaucoup plus efficace qu'une stack!
 
 
-Restons simpliste avec une liste pour mes valeurs : stack. Et une liste pour mes intructions: inst.
+Restons simpliste: Avec une liste pour mes valeurs stack, et une liste pour mes intructions inst.
 
 ```
 // ------------------------------------------ //
@@ -58,7 +58,7 @@ struct s_stack
 	t_stack	*next;
 };
 ```
-Pour votre utilisation de la stack quelque fonction primaire:
+Pour votre utilisation de la stack quelques fonctions primaires:
 ```
 t_stack	*ft_stack_create(int value);                        // Creation d'un maillon.
 void	ft_stack_addfront(t_stack **data, t_stack *elem);   // Ajout d'un maillon en tete de liste
@@ -69,7 +69,7 @@ void	ft_stack_clear(t_stack **data);                     // Efface la liste
 
 t_stack	*ft_stackdup(t_stack *list);                        // Fais une copie d'une stack
 ```
-Et pareil avec notre list d'instruction avec ses fonctions: 
+Et pareil avec notre liste d'instructions avec ses fonctions: 
 ```
 t_inst	*ft_inst_create(char *inst);
 void	ft_inst_addback(t_inst **data, t_inst *elem);
@@ -79,10 +79,10 @@ void	ft_inst_clear(t_inst **data);
 void	ft_inst_print(int fd, t_inst *data);                // Affichera notre liste
 ```
 
-💡 Pourquoi nous avons un list pour les instructions: 
-- Pour ne pas appeller write partout dans notre code, ce qui nous ferra gagner Enormement de temps d'execution.
+💡 Pourquoi nous avons une liste pour les instructions: 
+- Pour ne pas appeler write partout dans notre code, ce qui nous fera gagner enormement de temps d'execution.
 
-Pour les mouvements: J'utilise une concatenation de fonction ce qui rend plus lisible mon code. ( vous pouvais faire les votres, moi j'aime bien ce format si on l'utiliser avec un enum. ex: `_rx(sa, NULL, A);` pour executer l'instruction RA.
+Pour les mouvements: J'utilise une concatenation de fonctions ce qui rend plus lisible mon code. Vous pouvez faire les votres, moi j'aime bien ce format si on l'utilise avec un enum. ex: `_rx(sa, NULL, A);` pour executer l'instruction RA.
 
 ```
 enum e_opt
@@ -93,24 +93,24 @@ enum e_opt
 };
 ```
 
-##### Les Movements Brut:
+##### Les Mouvements bruts:
 ```
 void	ft_rotate(t_stack **stack);
 void	ft_reverse_rotate(t_stack **stack);
 void	ft_swap(t_stack **stack);
 void	ft_push(t_stack **stack_a, t_stack **stack_b);
 ```
-Le mouvement en lui meme qui vas modifier mes stacks. Elle ne modifie seulement les pointeurs de mes stacks.
+Le mouvement en lui-meme qui va modifier mes stacks. Elle modifie uniquement les pointeurs de mes stacks.
 Les swaps de valeur sont a utiliser avec des tableaux. 
 
-##### Les mouvement pilote:
+##### Les mouvements pilotes:
 ```
 void	_rx(t_inst **inst, t_stack **sa, t_stack **sb, int move);
 void	_rrx(t_inst **inst, t_stack **sa, t_stack **sb, int move);
 void	_sx(t_inst **inst, t_stack **sa, t_stack **sb, int move);
 void	_px(t_inst **inst, t_stack **sa, t_stack **sb, int move);
 ```
-Charger de push l'instruction dans la liste 'inst' et d'applique le movement a mes stacks. ex:
+Charges de push l'instruction dans la liste 'inst' et d'appliquer le mouvement a mes stacks. ex:
 
 ```void	_rx(t_inst **inst, t_stack **sa, t_stack **sb, int move)
 {
@@ -133,11 +133,12 @@ Charger de push l'instruction dans la liste 'inst' et d'applique le movement a m
 }
 ```
 
-Maintenant que nos outils son fonctionnel ( oui, je vou encourage a faire des tests pour savoir si ils fonctionnent correctement dans tout les cas )
+Maintenant que nos outils sont fonctionnels (oui, je vous encourage a faire des tests pour savoir s'ils fonctionnent correctement dans tous les cas)
 Nous pouvons commencer le project: 
 
 ## Le Parsing :
 
+//////
 ⚠️ Attention ⚠️ Tout ce que je fais dans mon parsing n'est pas demander par l'ecole ( bien que ca soit du bon sens de le faire ) ⚠️
 Dans le doute comparer avec l'output du checker Linux/Mac fournis par le suject.
 
